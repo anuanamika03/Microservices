@@ -1,0 +1,14 @@
+create database db_transfers;
+use db_transfers;
+
+CREATE TABLE ccpayments
+(
+    customer_id integer NOT NULL,
+    carddetails_cardno bigint NOT NULL,
+    savingsdetails_accountno integer NOT NULL,
+    transferred_amount double precision NOT NULL,
+    current_trans_date varchar(100) NOT NULL,
+    transaction_id  varchar(250) NOT NULL,
+    transaction_status  varchar(250)  NOT NULL,
+    CONSTRAINT CCPayments_pkey PRIMARY KEY (transaction_id)
+);

@@ -1,0 +1,65 @@
+c:\windows\system32\drivers\etc\hosts
+127.0.0.1 mydigitalbanking.com
+
+Then you can access the site like this:
+http://mydigitalbanking.com/digitalbanking-screens
+
+
+httpd.conf (alias)
+==================
+Alias /digitalbanking-screens "C:/vidavid/Training/2019/FoundationTrg_28_Aug_to_30_Aug/digitalbanking-screens-master/src/main/webapp"
+
+<Directory "C:/vidavid/Training/2019/FoundationTrg_28_Aug_to_30_Aug/digitalbanking-screens-master/src/main/webapp">
+Options Indexes FollowSymLinks Includes
+AllowOverride All
+Require all granted
+</Directory>
+
+
+
+
+
+RewriteEngine On
+ProxyPreserveHost On
+RewriteRule .*accservices/(\w+)/(\w+)  http://localhost:8090/accservices/$1/$2 [R]
+RewriteRule .*cardservices/(\w+)/(\w+)  http://localhost:8100/cardservices/$1/$2 [R]
+RewriteRule .*loanservices/(\w+)/(\w+)  http://localhost:8110/loanservices/$1/$2 [R]
+RewriteRule .*authservices/(\w+)/(\w+)  http://localhost:8120/authservices/$1/$2 [R]
+RewriteRule .*pymtservices/(\w+)/(\w+)  http://localhost:8130/pymtservices/$1/$2 [R]
+RewriteRule .*txfrservices/(\w+)/(\w+)  http://localhost:8140/txfrservices/$1/$2 [R]
+RewriteRule .*invservices/(\w+)/(\w+)  http://localhost:8150/invservices/$1/$2 [R]
+RewriteRule .*reportservices/(\w+)/(\w+)  http://localhost:8160/reportservices/$1/$2 [R]
+
+---------------------------------------------------------------------------------------------
+
+
+
+https://github.com/caprepo/digitalbanking-microservice/wiki
+
+
+#Account Service
+====================
+Port 8090
+/accservices/{customerId}/accounts - List of accounts for a customer id
+/accservices/{accountNo}/account - Details of a specific account
+
+Example:
+=========
+http://localhost:8090/accservices/556677/accounts
+http://localhost:8090/accservices/556678/accounts 
+http://localhost:8090/accservices/355245/account
+http://localhost:8090/accservices/355230/account
+http://localhost:8090/accservices/355650/account
+http://localhost:8090/accservices/355680/account
+
+
+#Card Service
+===============
+Port 8100
+/cardservices/{customerId}/cards - List of cards for a specific customer
+/cardservices/{cardNo}/card - Card details for a specific card
+
+##Example:
+http://localhost:8100/cardservices/556677/cards
+http://localhost:8100/cardservices/556678/cards
+http://localhost:8100/cardservices/3624978443870993/card
